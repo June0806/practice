@@ -4,10 +4,9 @@ spring:
   profile: prod
 
 eureka:
-  #在启动时指定
-  #client:
-  #serviceUrl:
-  #defaultZone: http://peer1:8001/eureka,http:peer2:8002/eureka
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka
   instance:
     instance-id: service-provider
     prefer-ip-address: true
