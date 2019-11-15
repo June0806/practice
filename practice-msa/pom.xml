@@ -12,12 +12,14 @@
     <modules>
         <module>practice-msa-register-center</module>
         <module>practice-msa-hello-service</module>
+        <module>practice-msa-consumer-ribbon</module>
+        <module>practice-msa-turbine</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-parent</artifactId>
-        <version>2.1.2.RELEASE</version>
+        <version>2.0.3.RELEASE</version>
     </parent>
 
     <dependencies>
@@ -44,7 +46,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.RELEASE</version>
+                <version>Finchley.SR4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -1,0 +1,26 @@
+server:
+  port: 2101
+spring:
+  application:
+    name: consumer-ribbon
+  profiles:
+    active: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka
+---
+spring:
+  profiles: cluster
+server:
+  port: 2101
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    preferIpAddress: false
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:1001/eureka/,http://peer2:1002/eureka
+#hystrix 全局配置
