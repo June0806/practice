@@ -23,4 +23,20 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://peer1:1001/eureka/,http://peer2:1002/eureka
+#ribbon 负载均衡配置策略
+hello-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+    ConnectTimeout: 30
+    ReadTimeout: 30
+    #重试次数
+    MaxAutoRetries: 1
+    #重试服务
+    MaxAutoRetriesNextServer: 1
+    OkToRetryOnAllOperations: true
+#ribbon 开启饥饿加载上下文，否则第一次加载时会很慢引起超时
+ribbon:
+  eager-load:
+    enabled: true
+    clients: hello-service
 #hystrix 全局配置

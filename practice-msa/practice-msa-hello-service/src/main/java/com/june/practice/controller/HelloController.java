@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class HelloController {
     private DiscoveryClient discoveryClient;
 
     @RequestMapping("/index")
-    public String index() throws MalformedURLException {
+    public String index(int a, int b, HttpServletRequest request) throws MalformedURLException {
         List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
         List<String> services = discoveryClient.getServices();
         services.forEach(i -> {
@@ -39,6 +40,7 @@ public class HelloController {
             stringBuilder.append("service id :" + instance.getServiceId());
             stringBuilder.append("url:" + instance.getUri().toURL());
         }
-        return stringBuilder.toString();
+        return "from port :" + request.getServerPort() + "result :" + (a + b);
+        //return stringBuilder.toString();
     }
 }
