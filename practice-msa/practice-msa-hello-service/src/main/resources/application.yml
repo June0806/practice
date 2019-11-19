@@ -31,3 +31,14 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://peer1:1001/eureka/,http://peer2:1002/eureka
+#actuator
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+feign:
+  hystrix:
+    enable: true

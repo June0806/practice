@@ -1,7 +1,12 @@
 server:
   port: 8989
 management:
-  port: 8990
+  security:
+    enabled: false
+    endpoints:
+      web:
+        exposure:
+          include: hystrix.stream
 spring:
   application:
     name: turbine
@@ -14,3 +19,7 @@ turbine:
   app-config: consumer-ribbon
   cluster-name-expression: default
   combine-host-port: true
+
+feign:
+  hystrix:
+    enable: true

@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * hello 服务 command
+ * hystrix 开启缓存
+ * the most common of doing 继承 hystrixCommand 实现getCacheKey
+ * 2. @CacheResult @CacheRemove @CacheKey
  */
 public class HelloCommand extends HystrixCommand<String> {
     private static HystrixCommandKey commandKey = HystrixCommandKey.Factory.asKey("helloServiceCommandKey");
