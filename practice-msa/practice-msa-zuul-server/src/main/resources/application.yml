@@ -1,0 +1,40 @@
+server:
+  port: 2201
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  application:
+    name: zuul-server
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    preferIdAddress: false
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:2001/eureka,http://peer2:2002/eureka
+zuul:
+  routes:
+    consumer-ribbon: /hello/**
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      #令牌端点
+      access-token-uri: http://localhost:2000/uaa/oauth/token
+      #授权断点
+      user-authorization-uri: http://localhost:2000/uaa/oauth/authrize
+      #oAuth2 客户端ID
+      client-id: zuul-server
+      #客户端密钥
+      client-secret: secret
+    resource:
+      jwt:
+        #默认使用HS256 对称加密算法
+        key-value: msa123456

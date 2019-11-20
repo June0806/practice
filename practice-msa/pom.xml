@@ -15,6 +15,7 @@
         <module>practice-msa-consumer-ribbon</module>
         <module>practice-msa-turbine</module>
         <module>practice-msa-zuul</module>
+        <module>practice-msa-zuul-server</module>
     </modules>
 
     <parent>
