@@ -14,6 +14,7 @@
         <module>practice-msa-hello-service</module>
         <module>practice-msa-consumer-ribbon</module>
         <module>practice-msa-turbine</module>
+        <module>practice-msa-zuul</module>
     </modules>
 
     <parent>

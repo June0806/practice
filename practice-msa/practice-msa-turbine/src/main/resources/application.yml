@@ -1,12 +1,10 @@
 server:
   port: 8989
 management:
-  security:
-    enabled: false
     endpoints:
       web:
         exposure:
-          include: hystrix.stream
+          include: "*"
 spring:
   application:
     name: turbine
@@ -14,10 +12,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://peer1:1001/eureka/,http://peer2:1002/eureka/
-
 turbine:
   app-config: consumer-ribbon
-  cluster-name-expression: default
+  cluster-name-expression: new String('default')
   combine-host-port: true
 
 feign:

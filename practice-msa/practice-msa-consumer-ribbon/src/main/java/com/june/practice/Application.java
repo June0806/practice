@@ -7,6 +7,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+/**
+ * 微服务的一篇比较好的文章
+ * https://www.imooc.com/u/7975493/articles
+ */
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients

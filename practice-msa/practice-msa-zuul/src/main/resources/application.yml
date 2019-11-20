@@ -1,0 +1,40 @@
+server:
+  port: 2200
+spring:
+  application:
+    name: zuul
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    preferIpAddress: false
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:1001/eureka,http://peer2:1002/eureka
+
+# 路由的作用:
+# 当A服务有一个 add 接口，B服务也有一个 add接口，此时可以通过路由来区分
+zuul:
+  ignored-services: he**
+  ignored-patterns: /a
+  add-host-header: true
+  retryable: true
+  prefix: /pre
+  routes:
+    hello-service:
+      path: /hello/**
+      serviceId: consumer-ribbon
+# 快捷设置
+#zuul:
+#  routes:
+#    hello-service:/hello/**
+
+#zuul:
+#  routes:
+#    hello-service

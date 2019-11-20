@@ -1,3 +1,9 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+---
 server:
   port: 2101
 spring:
@@ -35,14 +41,20 @@ eureka:
 #    MaxAutoRetriesNextServer: 1
 #    OkToRetryOnAllOperations: true
 #全局设置 ribbon 开启饥饿加载上下文，否则第一次加载时会很慢引起超时
+#若配置了重试则超时时间= (1 + MaxAutoRetries + MaxAutoRetriesNextServer) * ReadTimeout
 ribbon:
   ConnectTimeout: 6000
-  ReadTimeout: 6000
   MaxAutoRetries: 0
   MaxAutoRetriesNextServer: 0
   eager-load:
     enabled: true
     clients: hello-service
+threadpool:
+  default:
+    coreSize: 10
+    maxQueueSize: 50
+    queueSizeRejectionThreshold: 30
+    keepAliveTimeMinutes: 3
 #hystrix
 hystrix:
   command:
@@ -54,15 +66,6 @@ hystrix:
               timeoutInMilliseconds: 15000
         isolation:
           strategy: THREAD
-
-#hystrix dashboard 配置
-management:
-  security:
-    enabled: false
-  endpoints:
-    web:
-      exposure:
-        include: hystrix.stream
 feign:
   hystrix:
     enable: true
