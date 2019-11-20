@@ -12,13 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableDiscoveryClient
 @EnableZuulProxy
 @EnableOAuth2Sso
-public class Application extends WebSecurityConfigurerAdapter {
+public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
     }
 }

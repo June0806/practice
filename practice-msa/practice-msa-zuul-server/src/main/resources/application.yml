@@ -1,5 +1,7 @@
 server:
   port: 2201
+  servlet:
+    contextPath: /uaa #设置工程基路径
 management:
   endpoints:
     web:
