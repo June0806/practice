@@ -16,6 +16,7 @@
         <module>practice-msa-turbine</module>
         <module>practice-msa-zuul</module>
         <module>practice-msa-zuul-server</module>
+        <module>practice-msa-uaa</module>
     </modules>
 
     <parent>

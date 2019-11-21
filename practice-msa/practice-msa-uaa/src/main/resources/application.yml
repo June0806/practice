@@ -1,0 +1,16 @@
+server:
+  port: 2301
+  servlet:
+    contextPath: /uaa #web 基础路径 即home地址
+spring:
+  application:
+    name: auth-server
+eureka:
+  client:
+    serverUrl:
+      defaultZone: http://peer1:1001/eureka,http://peer2:1002/eureka
+  instance:
+    preferIpAddress: false
+    instanceId: ${spring.application.name}:${server.port}
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30

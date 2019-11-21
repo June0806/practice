@@ -1,5 +1,5 @@
 server:
-  port: 2200
+  port: 2300
 spring:
   application:
     name: zuul
@@ -25,7 +25,7 @@ zuul:
   ignored-patterns: /a
   add-host-header: true
   retryable: true
-  prefix: /pre
+  #prefix: /pre
   routes:
     hello-service:
       path: /hello/**
@@ -34,7 +34,19 @@ zuul:
 #zuul:
 #  routes:
 #    hello-service:/hello/**
-
 #zuul:
 #  routes:
 #    hello-service
+#spring security
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      access-token-uri: http://localhost:2301/uaa/oauth/token #token 端点
+      user-authorization-uri: http://localhost:2301/uaa/oauth/authorize #授权端点
+      client-id: zuul #oAuth2 客户端ID
+      client-secret: secret #oAuth2 客户端密钥
+    resource:
+      jwt:
+        key-value: msa123456 #使用对称加密方式，加密方式为HS256

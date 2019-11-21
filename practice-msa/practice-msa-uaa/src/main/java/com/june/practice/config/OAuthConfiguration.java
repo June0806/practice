@@ -8,12 +8,11 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
- *
+ * uaa 验证中心配置
  */
 @Configuration
 @EnableAuthorizationServer
@@ -23,9 +22,13 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("zuul-server").secret("SECRET").scopes("WRIGTH", "read").autoApprove(true)
+        clients.inMemory()
+                .withClient("zuul")
+                .secret("secret")
+                .scopes("WRIGTH", "read").autoApprove(true)
                 .authorities("WRIGTH_READ", "WRIGTH_WRITE")
-                .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code");
+                .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code")
+        ;
     }
 
     @Override
@@ -36,14 +39,12 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     }
 
     @Bean
-    public TokenStore jwtTokenStore() {
+    public JwtTokenStore jwtTokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("msa123456");
-        return jwtAccessTokenConverter;
+        return new JwtAccessTokenConverter();
     }
 }
